@@ -1,0 +1,80 @@
+@model IEnumerable<WebApplication1.Models.Venue>
+@using WebApplication1.Models
+
+@{
+    ViewData["Title"] = "Venues";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Venues</h1>
+        <p class="text-muted">Manage your venue listings</p>
+    </div>
+    <div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Add New Venue
+        </a>
+    </div>
+</div>
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Venue</th>
+            <th scope="col">Location</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Status</th>
+            <th scope="col">Usage</th>
+            <th scope="col" class="text-end">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="align-middle">
+                <div class="d-flex align-items-center">
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.VenueName" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <div class="rounded me-2 bg-secondary" style="width: 40px; height: 40px;"></div>
+                    }
+                    <div>
+                        <strong>@item.VenueName</strong>
+                    </div>
+                </div>
+            </td>
+            <td class="align-middle">@item.Location</td>
+            <td class="align-middle">@item.Capacity people</td>
+            <td class="align-middle">
+                @{
+                    var statusClass = item.Status switch
+                    {
+                        VenueStatus.Active => "bg-success",
+                        VenueStatus.Maintenance => "bg-warning",
+                        VenueStatus.Inactive => "bg-danger",
+                        _ => "bg-secondary"
+                    };
+                }
+                <span class="badge @statusClass">@item.Status</span>
+            </td>
+            <td class="align-middle">
+                <small class="text-muted">
+                    @item.Events.Count() events<br />
+                    @item.Bookings.Count() bookings
+                </small>
+            </td>
+            <td class="align-middle text-end">
+                <div class="btn-group" role="group">
+                    <a asp-action="Edit" asp-route-id="@item.VenueId" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.VenueId" class="btn btn-sm btn-outline-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.VenueId" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

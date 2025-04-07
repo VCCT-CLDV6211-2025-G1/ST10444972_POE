@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Welcome to EventEase</h1>
+    <p class="lead">Your comprehensive venue booking management system</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Venues</h5>
+                <p class="card-text">Manage venue information, capacity, and availability.</p>
+                <a asp-controller="Venues" asp-action="Index" class="btn btn-primary">View Venues</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Events</h5>
+                <p class="card-text">Create and manage events, set dates, and assign venues.</p>
+                <a asp-controller="Events" asp-action="Index" class="btn btn-primary">View Events</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Clients</h5>
+                <p class="card-text">Maintain client information and contact details.</p>
+                <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">View Clients</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Bookings</h5>
+                <p class="card-text">Manage venue bookings and prevent scheduling conflicts.</p>
+                <a asp-controller="Bookings" asp-action="Index" class="btn btn-primary">View Bookings</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quick Start Guide</h5>
+                <ol class="card-text">
+                    <li>Add venues to the system with their details and capacity</li>
+                    <li>Create events and optionally assign them to venues</li>
+                    <li>Add client information when taking booking requests</li>
+                    <li>Create bookings to link events with venues and clients</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

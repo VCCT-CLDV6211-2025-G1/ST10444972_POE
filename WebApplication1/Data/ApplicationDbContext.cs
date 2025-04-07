@@ -23,8 +23,8 @@ namespace WebApplication1.Data
             modelBuilder.Entity<Event>()
                 .HasOne(e => e.Venue)
                 .WithMany(v => v.Events)
-                .HasForeignKey(e => e.VenueId)
-                .OnDelete(DeleteBehavior.Restrict);  // Prevent cascade delete
+                .HasForeignKey(e => e.VenueId)  
+                .OnDelete(DeleteBehavior.Restrict);  // Prevent  cascade delete
 
             // Configure one-to-one relationship between Event and Booking
             modelBuilder.Entity<Booking>()

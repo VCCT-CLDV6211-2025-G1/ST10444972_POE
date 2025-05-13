@@ -18,6 +18,9 @@ namespace WebApplication1.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Venue>()
+                        .Property(v => v.Status)
+                        .HasConversion<string>();
 
             // Configure one-to-many relationship between Venue and Event
             modelBuilder.Entity<Event>()

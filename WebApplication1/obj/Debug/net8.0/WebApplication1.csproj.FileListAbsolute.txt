@@ -277,3 +277,5 @@ C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_P
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Debug\net8.0\WebApplication1.pdb
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Debug\net8.0\WebApplication1.genruntimeconfig.cache
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Debug\net8.0\ref\WebApplication1.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Debug\net8.0\WebApplication1.sourcelink.json
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\assignments\\cldv\\st10444972_eventease_poe\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\assignments\\cldv\\st10444972_eventease_poe\\webapplication1\\views\\venues\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\venues\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Program.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
-              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Program.cs",
-              "RelativeToolTip": "WebApplication1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T07:48:00.223Z",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Views\\Venues\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Venues\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Views\\Venues\\Create.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Venues\\Create.cshtml",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAAK8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-13T20:27:14.76Z",
               "EditorCaption": ""
             }
           ]

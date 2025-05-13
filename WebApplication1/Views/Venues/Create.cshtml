@@ -9,9 +9,45 @@
 
 <p class="text-muted">Add a new venue to the system</p>
 <hr />
+
+<!-- Image Cropper Modal -->
+<div class="modal fade" id="imageCropperModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crop Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <img id="cropperImage" src="" style="max-width: 100%;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="cropButton">Crop & Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (var error in modelState.Errors)
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+        <form asp-action="Create" enctype="multipart/form-data" id="createVenueForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="VenueName" class="control-label"></label>
@@ -29,9 +65,12 @@
                 <span asp-validation-for="Capacity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="ImageFile" class="control-label">Venue Image</label>
+                <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" id="imageInput" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                <div id="imagePreview" class="mt-2" style="display: none;">
+                    <img src="" alt="Image preview" style="max-width: 200px;" class="img-thumbnail" />
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
@@ -39,14 +78,110 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group mt-4">
-                <input type="submit" value="Create Venue" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary" id="submitButton">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" id="submitSpinner"></span>
+                    Create Venue
+                </button>
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let cropper;
+        let croppedImageBlob;
+
+        // Image selection and cropping
+        document.getElementById('imageInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Show the cropper modal
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const cropperImage = document.getElementById('cropperImage');
+                    cropperImage.src = e.target.result;
+                    
+                    // Initialize cropper
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    
+                    cropper = new Cropper(cropperImage, {
+                        aspectRatio: 16 / 9,
+                        viewMode: 2,
+                        responsive: true,
+                        zoomable: true
+                    });
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('imageCropperModal'));
+                    modal.show();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle crop button click
+        document.getElementById('cropButton').addEventListener('click', async function () {
+            if (cropper) {
+                // Get cropped canvas
+                const canvas = cropper.getCroppedCanvas({
+                    width: 800,  // Max width
+                    height: 600  // Max height
+                });
+                
+                // Convert canvas to blob
+                canvas.toBlob(function(blob) {
+                    // Create a new File object
+                    croppedImageBlob = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
+                    
+                    // Update preview
+                    const preview = document.getElementById('imagePreview');
+                    preview.style.display = 'block';
+                    preview.querySelector('img').src = canvas.toDataURL();
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('imageCropperModal'));
+                    modal.hide();
+                }, 'image/jpeg', 0.8); // JPEG at 80% quality
+            }
+        });
+
+        // Form submission with loading indicator
+        document.getElementById('createVenueForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            const submitButton = document.getElementById('submitButton');
+            const spinner = document.getElementById('submitSpinner');
+            const form = this;
+            
+            // Show loading state
+            submitButton.disabled = true;
+            spinner.classList.remove('d-none');
+
+            // Replace the original file with the cropped one
+            if (croppedImageBlob) {
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(croppedImageBlob);
+                document.getElementById('imageInput').files = dataTransfer.files;
+            }
+            
+            // Submit the form
+            form.submit();
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .img-container {
+            max-height: 500px;
+            overflow: hidden;
+        }
+        .cropper-container {
+            max-width: 100%;
+        }
+    </style>
 }

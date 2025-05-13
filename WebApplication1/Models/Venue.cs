@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using WebApplication1.Validation;
 
 namespace WebApplication1.Models
 {
@@ -20,9 +23,13 @@ namespace WebApplication1.Models
         [Range(1, 100000)]
         public int Capacity { get; set; }
 
-        [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; } = string.Empty;
+
+        [Display(Name = "Venue Image")]
+        [NotMapped]
+        [AllowedImageExtensions(5)] // Max 5MB file size
+        public IFormFile? ImageFile { get; set; }
 
         [Required]
         public VenueStatus Status { get; set; } = VenueStatus.Active;

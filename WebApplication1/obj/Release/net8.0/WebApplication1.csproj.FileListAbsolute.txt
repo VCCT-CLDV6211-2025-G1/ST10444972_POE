@@ -277,3 +277,13 @@ C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_P
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Release\net8.0\WebApplication1.pdb
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Release\net8.0\WebApplication1.genruntimeconfig.cache
 C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Release\net8.0\ref\WebApplication1.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Release\net8.0\WebApplication1.sourcelink.json
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\Azure.Storage.Blobs.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\Azure.Storage.Common.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\System.IO.Hashing.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\Microsoft.Extensions.Logging.AzureAppServices.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\System.Drawing.Common.dll
+C:\Users\ethan\OneDrive\Documents\BCAD02\Assignments\CLDV\ST10444972_EventEase_POE\WebApplication1\bin\Release\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll

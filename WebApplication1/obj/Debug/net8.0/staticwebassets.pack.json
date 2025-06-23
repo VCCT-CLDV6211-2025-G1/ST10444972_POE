@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\js\\venue-availability.js",
+      "PackagePath": "staticwebassets\\js\\venue-availability.js"
+    },
+    {
       "Id": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

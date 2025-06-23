@@ -14,6 +14,8 @@ namespace WebApplication1.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<EventType> EventTypes { get; set; }
+        public DbSet<VenueAvailabilityPeriod> VenueAvailabilityPeriods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +51,20 @@ namespace WebApplication1.Data
                 .WithMany(c => c.Bookings)
                 .HasForeignKey(b => b.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure one-to-many relationship between EventType and Event
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.EventType)
+                .WithMany(et => et.Events)
+                .HasForeignKey(e => e.EventTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure one-to-many relationship between Venue and VenueAvailabilityPeriod
+            modelBuilder.Entity<VenueAvailabilityPeriod>()
+                .HasOne(v => v.Venue)
+                .WithMany(v => v.AvailabilityPeriods)
+                .HasForeignKey(v => v.VenueId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

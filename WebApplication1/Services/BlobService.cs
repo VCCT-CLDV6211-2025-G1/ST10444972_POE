@@ -17,6 +17,10 @@ namespace WebApplication1.Services
             _containerName = "images";
             _imageService = imageService;
             _logger = logger;
+
+            // Ensure container exists
+            var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
+            containerClient.CreateIfNotExists(PublicAccessType.Blob);
         }
 
         public async Task<string> UploadImageAsync(IFormFile file)

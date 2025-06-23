@@ -10,7 +10,7 @@ namespace WebApplication1.Models
         [Required]
         [StringLength(100)]
         [Display(Name = "Client Name")]
-        public string Name { get; set; } = string.Empty;
+        public string ClientName { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]
@@ -19,12 +19,14 @@ namespace WebApplication1.Models
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
         [StringLength(20)]
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(200)]
+        public string Address { get; set; } = string.Empty;
 
         [Display(Name = "Created Date")]
-        [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
         // Navigation property

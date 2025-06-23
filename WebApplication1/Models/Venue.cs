@@ -45,5 +45,19 @@ namespace WebApplication1.Models
         // Navigation properties
         public virtual ICollection<Event> Events { get; set; } = new List<Event>();
         public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        public virtual ICollection<VenueAvailabilityPeriod> AvailabilityPeriods { get; set; } = new List<VenueAvailabilityPeriod>();
+
+        public bool IsAvailable(DateTime startDate, DateTime endDate)
+        {
+            // Check if venue is active
+            if (Status != VenueStatus.Active)
+                return false;
+
+            // Check if there are any overlapping unavailability periods
+            return !AvailabilityPeriods.Any(p =>
+                (p.StartDate <= endDate && p.EndDate >= startDate) || // Period overlaps with requested dates
+                (p.StartDate >= startDate && p.StartDate <= endDate) || // Period starts during requested dates
+                (p.EndDate >= startDate && p.EndDate <= endDate)); // Period ends during requested dates
+        }
     }
 }

@@ -331,6 +331,88 @@
       ]
     },
     {
+      "Route": "js/venue-availability.bdvrwfwe2p.js",
+      "AssetFile": "js/venue-availability.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4835"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 22:34:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bdvrwfwe2p"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
+        },
+        {
+          "Name": "label",
+          "Value": "js/venue-availability.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/venue-availability.js",
+      "AssetFile": "js/venue-availability.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4835"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 22:34:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
+        }
+      ]
+    },
+    {
       "Route": "lib/bootstrap/LICENSE",
       "AssetFile": "lib/bootstrap/LICENSE",
       "Selectors": [],

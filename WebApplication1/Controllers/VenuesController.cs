@@ -84,6 +84,7 @@ namespace WebApplication1.Controllers
                     
                     venue.CreatedDate = DateTime.UtcNow;
                     venue.LastModified = DateTime.UtcNow;
+                    venue.Status = VenueStatus.Active; // Set default status for new venues
                     
                     _logger.LogInformation("Attempting to save venue to database");
                     _context.Add(venue);

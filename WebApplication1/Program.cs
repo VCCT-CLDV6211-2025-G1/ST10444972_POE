@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Services;
+using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<BlobService>();
 builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<IVenueAvailabilityService, VenueAvailabilityService>();
+builder.Services.AddScoped<IEventFilterService, EventFilterService>();
 
 // Add logging configuration
 builder.Logging.AddAzureWebAppDiagnostics();
@@ -22,6 +25,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 maxRetryDelay: TimeSpan.FromSeconds(30),
                 errorNumbersToAdd: null);
         }));
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddBlobServiceClient(builder.Configuration.GetConnectionString("BlobStorage"))
+        .ConfigureOptions(options =>
+        {
+            options.Retry.MaxRetries = 3;
+        });
+});
 
 var app = builder.Build();
 

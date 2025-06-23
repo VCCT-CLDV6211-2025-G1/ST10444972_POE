@@ -1,110 +1,71 @@
-@model IEnumerable<WebApplication1.Models.BookingViewModel>
+@model IEnumerable<WebApplication1.Models.Booking>
 
 @{
-    ViewData["Title"] = "Bookings";
+    ViewData["Title"] = "Index";
 }
 
-<div class="container">
-    <h1>Bookings Management</h1>
-    <p class="text-muted">View and manage event bookings</p>
+<h1>Index</h1>
 
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <form asp-action="Index" method="get" class="form-inline">
-                <div class="input-group">
-                    <input type="text" name="searchString" class="form-control" 
-                           placeholder="Search bookings..." 
-                           value="@ViewData["CurrentSearchString"]" />
-                    <select name="searchBy" class="form-select" style="max-width: 150px;">
-                        <option value="booking" selected="@(ViewData["CurrentSearchBy"]?.ToString() == "booking")">Booking ID</option>
-                        <option value="event" selected="@(ViewData["CurrentSearchBy"]?.ToString() == "event")">Event Name</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    @if (!string.IsNullOrEmpty(ViewData["CurrentSearchString"]?.ToString()))
-                    {
-                        <a asp-action="Index" class="btn btn-secondary">Clear</a>
-                    }
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4 text-end">
-            <a asp-action="Create" class="btn btn-success">Create New Booking</a>
-        </div>
-    </div>
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            No bookings found. @(ViewData["CurrentSearchString"] != null ? "Try a different search term." : "")
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            @foreach (var booking in Model)
-            {
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                @if (!string.IsNullOrEmpty(booking.VenueImageUrl))
-                                {
-                                    <img src="@booking.VenueImageUrl" class="img-fluid rounded-start" alt="Venue image"
-                                         style="height: 100%; object-fit: cover;">
-                                }
-                                else
-                                {
-                                    <div class="bg-light h-100 d-flex align-items-center justify-content-center">
-                                        <span class="text-muted">No image</span>
-                                    </div>
-                                }
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Booking #@booking.BookingId</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">@booking.EventName</h6>
-                                    
-                                    <div class="mt-3">
-                                        <p class="mb-1">
-                                            <strong>Venue:</strong> @booking.VenueName
-                                            <small class="text-muted d-block">@booking.VenueLocation</small>
-                                        </p>
-                                        <p class="mb-1">
-                                            <strong>Event Date:</strong> @booking.EventDate.ToShortDateString()
-                                        </p>
-                                        <p class="mb-1">
-                                            <strong>Attendees:</strong> @booking.NumberOfAttendees
-                                        </p>
-                                        <p class="mb-1">
-                                            <strong>Total Cost:</strong> @booking.TotalCost.ToString("C")
-                                        </p>
-                                        <p class="mb-1">
-                                            <strong>Client:</strong> @booking.ClientName
-                                            <small class="text-muted d-block">@booking.ClientEmail</small>
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="mt-3">
-                                        <a asp-action="Edit" asp-route-id="@booking.BookingId" class="btn btn-primary btn-sm">Edit</a>
-                                        <a asp-action="Details" asp-route-id="@booking.BookingId" class="btn btn-info btn-sm">Details</a>
-                                        <a asp-action="Delete" asp-route-id="@booking.BookingId" class="btn btn-danger btn-sm">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    }
-</div>
-
-@section Scripts {
-    <script>
-        // Enable Bootstrap tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-    </script>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Event)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastModified)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModified)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>

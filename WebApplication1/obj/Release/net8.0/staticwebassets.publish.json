@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RuVHrnOL1ZjeSpw2FnrubcL5LxsPDq+GlmQAs+s3PhQ=",
+  "Hash": "o1ZLIOZRx03N+6S2rnZr0fpIwmcGcmDV/MFYw+ZsuD4=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -120,6 +120,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\js\\venue-availability.js",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "js/venue-availability#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bdvrwfwe2p",
+      "Integrity": "jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\venue-availability.js"
     },
     {
       "Identity": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
@@ -1563,6 +1584,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
+        }
+      ]
+    },
+    {
+      "Route": "js/venue-availability.bdvrwfwe2p.js",
+      "AssetFile": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\js\\venue-availability.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4835"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 22:34:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bdvrwfwe2p"
+        },
+        {
+          "Name": "label",
+          "Value": "js/venue-availability.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
+        }
+      ]
+    },
+    {
+      "Route": "js/venue-availability.js",
+      "AssetFile": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\wwwroot\\js\\venue-availability.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4835"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 22:34:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
         }
       ]
     },

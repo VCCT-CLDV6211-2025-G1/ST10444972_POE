@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\assignments\\cldv\\st10444972_eventease_poe\\webapplication1\\views\\venues\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\venues\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\assignments\\cldv\\st10444972_eventease_poe\\webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Views\\Venues\\Create.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Venues\\Create.cshtml",
-              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\Views\\Venues\\Create.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Venues\\Create.cshtml",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAAAK8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-13T20:27:14.76Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApplication1\\appsettings.json",
+              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\appsettings.json",
+              "RelativeToolTip": "WebApplication1\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAADSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-23T18:01:14.894Z",
               "EditorCaption": ""
             }
           ]

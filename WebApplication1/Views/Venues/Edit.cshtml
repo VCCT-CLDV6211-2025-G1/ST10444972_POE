@@ -84,6 +84,7 @@
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<VenueStatus>()"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
+                <small class="text-muted">Note: 'Available' is a legacy status. Use 'Active' for new or updated venues.</small>
             </div>
             <div class="form-group mt-4">
                 <button type="submit" class="btn btn-primary" id="submitButton">
@@ -142,8 +143,10 @@
                 
                 // Convert canvas to blob
                 canvas.toBlob(function(blob) {
-                    // Create a new File object
-                    croppedImageBlob = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
+                    // Create a new File object with original filename + -cropped
+                    const originalName = document.getElementById('imageInput').files[0].name;
+                    const newName = originalName.replace(/\.[^/.]+$/, "") + "-cropped.jpg";
+                    croppedImageBlob = new File([blob], newName, { type: 'image/jpeg' });
                     
                     // Update preview
                     const preview = document.getElementById('imagePreview');

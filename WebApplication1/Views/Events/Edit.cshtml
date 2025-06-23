@@ -1,69 +1,164 @@
 @model WebApplication1.Models.Event
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Event";
 }
 
-<h1>Edit</h1>
+<h1>Edit Event</h1>
 
-<h4>Event</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EventId" />
+            <input type="hidden" asp-for="CreatedDate" />
+
+            @if (ViewBag.OverlappingEvents != null)
+            {
+                <div class="alert alert-warning">
+                    <h5>Conflicting Events:</h5>
+                    <ul>
+                        @foreach (var evt in ViewBag.OverlappingEvents)
+                        {
+                            <li>
+                                @evt.EventName
+                                <br />
+                                <small class="text-muted">
+                                    @evt.StartDate.ToString("MMM dd, yyyy HH:mm") - @evt.EndDate.ToString("MMM dd, yyyy HH:mm")
+                                </small>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
             <div class="form-group">
                 <label asp-for="EventName" class="control-label"></label>
                 <input asp-for="EventName" class="form-control" />
                 <span asp-validation-for="EventName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
+                <input asp-for="StartDate" class="form-control" type="datetime-local" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" class="form-control" type="datetime-local" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="EventTypeId" class="control-label">Event Type</label>
+                <select asp-for="EventTypeId" class="form-select">
+                    <option value="">-- Select Event Type --</option>
+                    @foreach (var eventType in ViewBag.EventTypes)
+                    {
+                        if (eventType.IsActive || eventType.EventTypeId == Model.EventTypeId)
+                        {
+                            <option value="@eventType.EventTypeId">@eventType.Name</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="EventTypeId" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="VenueId" class="control-label"></label>
-                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId"></select>
+                <select asp-for="VenueId" class="form-select">
+                    <option value="">-- Select Venue --</option>
+                    @foreach (var venue in ViewBag.Venues)
+                    {
+                        <option value="@venue.VenueId">@venue.VenueName (@venue.Location) - Capacity: @venue.Capacity</option>
+                    }
+                </select>
                 <span asp-validation-for="VenueId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <select asp-for="Status" class="form-select">
+                    <option value="pending_venue">Pending Venue</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastModified" class="control-label"></label>
-                <input asp-for="LastModified" class="form-control" />
-                <span asp-validation-for="LastModified" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                @if (Model.Status != "cancelled" && Model.StartDate > DateTime.UtcNow)
+                {
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">
+                        Cancel Event
+                    </button>
+                }
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<!-- Cancel Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancel Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this event?</p>
+                <p><strong>@Model.EventName</strong></p>
+                <p class="text-muted">
+                    @Model.StartDate.ToString("MMM dd, yyyy HH:mm") - @Model.EndDate.ToString("MMM dd, yyyy HH:mm")
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form asp-action="Cancel" asp-route-id="@Model.EventId" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Cancel Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/venue-availability.js"></script>
+    <script>
+        // Set min date for datetime-local inputs to today
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date();
+            today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+            const todayStr = today.toISOString().slice(0, 16);
+            
+            document.querySelector('#StartDate').min = todayStr;
+            document.querySelector('#EndDate').min = todayStr;
+
+            // Initialize venue availability checking with current event ID
+            setupAvailabilityCheck(@Model.EventId);
+        });
+
+        // Update EndDate min when StartDate changes
+        document.querySelector('#StartDate').addEventListener('change', function() {
+            document.querySelector('#EndDate').min = this.value;
+            
+            // If EndDate is now before StartDate, update it
+            const endDate = document.querySelector('#EndDate');
+            if (endDate.value && endDate.value < this.value) {
+                endDate.value = this.value;
+            }
+        });
+    </script>
 }

@@ -1,77 +1,159 @@
-@model IEnumerable<WebApplication1.Models.Event>
+@model (IEnumerable<WebApplication1.Models.Event> Events, WebApplication1.Models.EventFilterViewModel Filter)
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Events";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Events</h1>
+        <p class="text-muted">View and manage events</p>
+    </div>
+    <div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Event
+        </a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastModified)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModified)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
+<div class="card mb-4">
+    <div class="card-header bg-light">
+        <h5 class="card-title mb-0">Filter Events</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" id="filterForm">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Filter.SearchTerm" class="form-label">Search</label>
+                    <input asp-for="Filter.SearchTerm" class="form-control" placeholder="Search events...">
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Filter.EventTypeId" class="form-label">Event Type</label>
+                    <select asp-for="Filter.EventTypeId" class="form-select">
+                        <option value="">All Types</option>
+                        @foreach (var type in Model.Filter.EventTypes)
+                        {
+                            <option value="@type.EventTypeId">@type.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Filter.VenueId" class="form-label">Venue</label>
+                    <select asp-for="Filter.VenueId" class="form-select">
+                        <option value="">All Venues</option>
+                        @foreach (var venue in Model.Filter.Venues)
+                        {
+                            <option value="@venue.VenueId">@venue.VenueName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Filter.StartDate" class="form-label">Start Date</label>
+                    <input asp-for="Filter.StartDate" class="form-control" type="date">
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Filter.EndDate" class="form-label">End Date</label>
+                    <input asp-for="Filter.EndDate" class="form-control" type="date">
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Filter.Status" class="form-label">Status</label>
+                    <select asp-for="Filter.Status" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+<div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i> Apply Filters
+                    </button>
+                    <a asp-action="Index" asp-route-searchTerm="" asp-route-eventTypeId="" asp-route-venueId="" 
+                       asp-route-startDate="" asp-route-endDate="" asp-route-status="" 
+                       class="btn btn-outline-secondary">Clear Filters</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Date & Time</th>
+                <th>Venue</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        <strong>@item.EventName</strong>
+                        <div class="text-muted small">@item.Description</div>
+                    </td>
+                    <td>
+                        <div>@item.StartDate.ToString("MMM dd, yyyy")</div>
+                        <div class="text-muted small">
+                            @item.StartDate.ToString("HH:mm") - @item.EndDate.ToString("HH:mm")
+                        </div>
+                    </td>
+                    <td>@(item.Venue?.VenueName ?? "No venue")</td>
+                    <td>@(item.EventType?.Name ?? "Unspecified")</td>
+                    <td>
+                        @{
+                            var statusClass = item.Status.ToLower() switch
+                            {
+                                "scheduled" => "bg-info",
+                                "confirmed" => "bg-success",
+                                "cancelled" => "bg-danger",
+                                "completed" => "bg-secondary",
+                                _ => "bg-secondary"
+                            };
+                        }
+                        <span class="badge @statusClass">@item.Status</span>
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.EventId" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.EventId" class="btn btn-sm btn-outline-info">Details</a>
+                            @if (item.CanModify())
+                            {
+                                <form asp-action="Cancel" asp-route-id="@item.EventId" method="post" class="d-inline" 
+                                      onsubmit="return confirm('Are you sure you want to cancel this event?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                </form>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Events.Any())
+{
+    <div class="alert alert-info">
+        No events found matching your criteria.
+    </div>
 }
-    </tbody>
-</table>
+
+@section Scripts {
+    <script>
+        // Handle search input with debounce
+        let timeout;
+        document.getElementById('Filter_SearchTerm').addEventListener('input', (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                document.getElementById('filterForm').submit();
+            }, 500);
+        });
+    </script>
+}

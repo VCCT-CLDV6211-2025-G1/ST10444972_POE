@@ -53,6 +53,7 @@
                     var statusClass = item.Status switch
                     {
                         VenueStatus.Active => "bg-success",
+                        VenueStatus.Available => "bg-success",  // Treat Available same as Active
                         VenueStatus.Maintenance => "bg-warning",
                         VenueStatus.Inactive => "bg-danger",
                         _ => "bg-secondary"

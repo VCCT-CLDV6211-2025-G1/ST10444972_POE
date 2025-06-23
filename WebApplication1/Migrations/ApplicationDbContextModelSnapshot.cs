@@ -17,7 +17,7 @@ namespace WebApplication1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -126,6 +126,9 @@ namespace WebApplication1.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("EventTypeId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -141,9 +144,37 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("EventId");
 
+                    b.HasIndex("EventTypeId");
+
                     b.HasIndex("VenueId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.EventType", b =>
+                {
+                    b.Property<int>("EventTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventTypeId"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("EventTypeId");
+
+                    b.ToTable("EventTypes");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Venue", b =>
@@ -186,6 +217,38 @@ namespace WebApplication1.Migrations
                     b.ToTable("Venues");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.VenueAvailabilityPeriod", b =>
+                {
+                    b.Property<int>("VenueAvailabilityPeriodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VenueAvailabilityPeriodId"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VenueId")
+                        .HasColumnType("int");
+
+                    b.HasKey("VenueAvailabilityPeriodId");
+
+                    b.HasIndex("VenueId");
+
+                    b.ToTable("VenueAvailabilityPeriods");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Booking", b =>
                 {
                     b.HasOne("WebApplication1.Models.Client", "Client")
@@ -215,10 +278,29 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Event", b =>
                 {
+                    b.HasOne("WebApplication1.Models.EventType", "EventType")
+                        .WithMany("Events")
+                        .HasForeignKey("EventTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("WebApplication1.Models.Venue", "Venue")
                         .WithMany("Events")
                         .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("EventType");
+
+                    b.Navigation("Venue");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.VenueAvailabilityPeriod", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Venue", "Venue")
+                        .WithMany("AvailabilityPeriods")
+                        .HasForeignKey("VenueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Venue");
                 });
@@ -233,8 +315,15 @@ namespace WebApplication1.Migrations
                     b.Navigation("Booking");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.EventType", b =>
+                {
+                    b.Navigation("Events");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Venue", b =>
                 {
+                    b.Navigation("AvailabilityPeriods");
+
                     b.Navigation("Bookings");
 
                     b.Navigation("Events");

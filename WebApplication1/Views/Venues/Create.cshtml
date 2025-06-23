@@ -74,7 +74,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<VenueStatus>()"></select>
+                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<VenueStatus>()">
+                    <option value="@VenueStatus.Active" selected>Active</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group mt-4">
@@ -134,8 +136,10 @@
                 
                 // Convert canvas to blob
                 canvas.toBlob(function(blob) {
-                    // Create a new File object
-                    croppedImageBlob = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
+                    // Create a new File object with original filename + -cropped
+                    const originalName = document.getElementById('imageInput').files[0].name;
+                    const newName = originalName.replace(/\.[^/.]+$/, "") + "-cropped.jpg";
+                    croppedImageBlob = new File([blob], newName, { type: 'image/jpeg' });
                     
                     // Update preview
                     const preview = document.getElementById('imagePreview');

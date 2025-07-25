@@ -22,20 +22,24 @@ function showSuccess(containerId = 'venueConflicts') {
 
 function showConflicts(conflicts, containerId = 'venueConflicts') {
     const container = document.getElementById(containerId);
-    let conflictHtml = '<div class="alert alert-warning mt-3"><h5>Conflicting Events:</h5><ul>';
+    let conflictHtml = '<div class="alert alert-warning mt-3"><h5>Venue Already Booked:</h5><ul>';
     
     conflicts.forEach(conflict => {
-        const start = formatDateTime(conflict.startDate);
-        const end = formatDateTime(conflict.endDate);
+        const startDate = new Date(conflict.startDate).toLocaleDateString();
+        const endDate = new Date(conflict.endDate).toLocaleDateString();
+        const timeRange = `${new Date(conflict.startDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - ${new Date(conflict.endDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+        
         conflictHtml += `
             <li>
-                ${conflict.eventName}
+                <strong>${conflict.eventName}</strong>
                 <br/>
-                <small class="text-muted">${start} - ${end}</small>
+                <small class="text-muted">Date: ${startDate === endDate ? startDate : `${startDate} - ${endDate}`}</small>
+                <br/>
+                <small class="text-muted">Time: ${timeRange}</small>
             </li>`;
     });
     
-    conflictHtml += '</ul></div>';
+    conflictHtml += '</ul><p><small>Only one event per day is allowed per venue.</small></div>';
     container.innerHTML = conflictHtml;
     container.style.display = 'block';
 }
@@ -107,6 +111,34 @@ async function checkVenueAvailability(venueId, startDate, endDate, eventId = nul
     }
 }
 
+async function showBookedDates(venueId, eventId = null) {
+    if (!venueId) return;
+    
+    try {
+        const params = new URLSearchParams({ excludeEventId: eventId || '' });
+        const response = await fetch(`/api/VenueAvailability/booked-dates/${venueId}?${params}`);
+        const bookedDates = await response.json();
+        
+        let bookedDatesDiv = document.getElementById('bookedDates');
+        if (!bookedDatesDiv) {
+            bookedDatesDiv = document.createElement('div');
+            bookedDatesDiv.id = 'bookedDates';
+            document.getElementById('VenueId').parentNode.appendChild(bookedDatesDiv);
+        }
+        
+        if (bookedDates.length > 0) {
+            bookedDatesDiv.innerHTML = `
+                <div class="alert alert-info mt-2">
+                    <small><strong>Booked Dates:</strong> ${bookedDates.join(', ')}</small>
+                </div>`;
+        } else {
+            bookedDatesDiv.innerHTML = '';
+        }
+    } catch (error) {
+        console.error('Error fetching booked dates:', error);
+    }
+}
+
 function setupAvailabilityCheck(eventId = null) {
     const venueSelect = document.getElementById('VenueId');
     const startDateInput = document.getElementById('StartDate');
@@ -140,12 +172,18 @@ function setupAvailabilityCheck(eventId = null) {
         timeoutId = setTimeout(checkAvailability, 500);
     }
 
-    venueSelect.addEventListener('change', debouncedCheck);
+    venueSelect.addEventListener('change', function() {
+        showBookedDates(this.value, eventId);
+        debouncedCheck();
+    });
     startDateInput.addEventListener('change', debouncedCheck);
     endDateInput.addEventListener('change', debouncedCheck);
 
-    // Check availability on page load if all values are set
-    if (venueSelect.value && startDateInput.value && endDateInput.value) {
-        checkAvailability();
+    // Show booked dates and check availability on page load
+    if (venueSelect.value) {
+        showBookedDates(venueSelect.value, eventId);
+        if (startDateInput.value && endDateInput.value) {
+            checkAvailability();
+        }
     }
 }

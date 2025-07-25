@@ -331,51 +331,6 @@
       ]
     },
     {
-      "Route": "js/venue-availability.bdvrwfwe2p.js",
-      "AssetFile": "js/venue-availability.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4835"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 22:34:35 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "bdvrwfwe2p"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
-        },
-        {
-          "Name": "label",
-          "Value": "js/venue-availability.js"
-        }
-      ]
-    },
-    {
       "Route": "js/venue-availability.js",
       "AssetFile": "js/venue-availability.js",
       "Selectors": [],
@@ -390,7 +345,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4835"
+          "Value": "6575"
         },
         {
           "Name": "Content-Type",
@@ -398,17 +353,62 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=\""
+          "Value": "\"QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 22:34:35 GMT"
+          "Value": "Fri, 25 Jul 2025 09:39:56 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg="
+          "Value": "sha256-QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU="
+        }
+      ]
+    },
+    {
+      "Route": "js/venue-availability.qtlpzy9o2e.js",
+      "AssetFile": "js/venue-availability.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6575"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Jul 2025 09:39:56 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qtlpzy9o2e"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU="
+        },
+        {
+          "Name": "label",
+          "Value": "js/venue-availability.js"
         }
       ]
     },

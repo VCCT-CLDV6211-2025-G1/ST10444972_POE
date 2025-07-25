@@ -9,15 +9,16 @@ namespace WebApplication1.Models
         [Required]
         [StringLength(100)]
         [Display(Name = "Event Type Name")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
+        [Required]
         [StringLength(500)]
-        public string Description { get; set; }
+        public required string Description { get; set; }
 
         [Display(Name = "Active")]
         public bool IsActive { get; set; } = true;
 
         // Navigation property
-        public virtual ICollection<Event> Events { get; set; }
+        public required virtual ICollection<Event> Events { get; set; }
     }
 }

@@ -35,11 +35,14 @@
                 <div class="d-flex align-items-center">
                     @if (!string.IsNullOrEmpty(item.ImageUrl))
                     {
-                        <img src="@item.ImageUrl" alt="@item.VenueName" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;" />
+                        <img src="@item.ImageUrl" alt="@item.VenueName" class="rounded me-2" style="width: 40px; height: 40px; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                        <div class="rounded me-2 bg-secondary d-none" style="width: 40px; height: 40px;"></div>
+                        <small class="text-muted">URL: @item.ImageUrl</small>
                     }
                     else
                     {
                         <div class="rounded me-2 bg-secondary" style="width: 40px; height: 40px;"></div>
+                        <small class="text-muted">No image</small>
                     }
                     <div>
                         <strong>@item.VenueName</strong>

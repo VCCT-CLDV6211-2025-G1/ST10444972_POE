@@ -25,14 +25,21 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index([FromQuery]EventFilterViewModel filter)
+        public async Task<IActionResult> Index(string searchTerm, int? eventTypeId, int? venueId, DateTime? startDate, DateTime? endDate, string status)
         {
             try
             {
-                _logger.LogInformation("Receiving filter parameters: {@Filter}", filter);
+                var filter = new EventFilterViewModel
+                {
+                    SearchTerm = searchTerm,
+                    EventTypeId = eventTypeId,
+                    VenueId = venueId,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    Status = status
+                };
 
-                // Initialize filter if null
-                filter ??= new EventFilterViewModel();
+                _logger.LogInformation("Receiving filter parameters: {@Filter}", filter);
 
                 // Populate dropdowns and apply filters
                 filter = await _filterService.PopulateFilterDropdowns(filter);
@@ -120,6 +127,11 @@ namespace WebApplication1.Controllers
             ViewBag.Venues = await _context.Venues
                 .Where(v => v.Status == VenueStatus.Active)
                 .OrderBy(v => v.VenueName)
+                .ToListAsync();
+
+            ViewBag.EventTypes = await _context.EventTypes
+                .Where(et => et.IsActive)
+                .OrderBy(et => et.Name)
                 .ToListAsync();
 
             if (@event.VenueId.HasValue)

@@ -16,19 +16,20 @@
             @if (ViewBag.OverlappingEvents != null)
             {
                 <div class="alert alert-warning">
-                    <h5>Conflicting Events:</h5>
+                    <h5>Venue Already Booked:</h5>
                     <ul>
                         @foreach (var evt in ViewBag.OverlappingEvents)
                         {
                             <li>
-                                @evt.EventName
+                                <strong>@evt.EventName</strong>
                                 <br />
-                                <small class="text-muted">
-                                    @evt.StartDate.ToString("MMM dd, yyyy HH:mm") - @evt.EndDate.ToString("MMM dd, yyyy HH:mm")
-                                </small>
+                                <small class="text-muted">Date: @evt.DateRange</small>
+                                <br />
+                                <small class="text-muted">Time: @evt.TimeRange</small>
                             </li>
                         }
                     </ul>
+                    <p><small>Only one event per day is allowed per venue.</small></p>
                 </div>
             }
 

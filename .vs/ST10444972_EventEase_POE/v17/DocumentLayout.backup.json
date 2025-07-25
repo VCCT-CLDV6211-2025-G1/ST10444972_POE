@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\",
+  "WorkspaceRootPath": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\S1\\Assignments\\CLDV\\POE Resubmission\\EventEase\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\assignments\\cldv\\st10444972_eventease_poe\\webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|c:\\users\\ethan\\onedrive\\documents\\bcad02\\s1\\assignments\\cldv\\poe resubmission\\eventease\\webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5839DEC4-3B62-4D37-9A15-17253A5275D6}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -14,17 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\S1\\Assignments\\CLDV\\POE Resubmission\\EventEase\\WebApplication1\\appsettings.json",
               "RelativeDocumentMoniker": "WebApplication1\\appsettings.json",
-              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\Assignments\\CLDV\\ST10444972_EventEase_POE\\WebApplication1\\appsettings.json",
+              "ToolTip": "C:\\Users\\ethan\\OneDrive\\Documents\\BCAD02\\S1\\Assignments\\CLDV\\POE Resubmission\\EventEase\\WebApplication1\\appsettings.json",
               "RelativeToolTip": "WebApplication1\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAADSAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAADYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-06-23T18:01:14.894Z",
               "EditorCaption": ""

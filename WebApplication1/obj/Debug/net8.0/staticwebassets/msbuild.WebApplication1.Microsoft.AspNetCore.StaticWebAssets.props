@@ -66,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>bdvrwfwe2p</Fingerprint>
-      <Integrity>jxPHG0QH+rAZFCfWlOfwIZu82DU+I/ulEOYBBMMfYSg=</Integrity>
+      <Fingerprint>qtlpzy9o2e</Fingerprint>
+      <Integrity>QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\venue-availability.js'))</OriginalItemSpec>

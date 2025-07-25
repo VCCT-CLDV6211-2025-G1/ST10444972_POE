@@ -9,24 +9,25 @@
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             @if (ViewBag.OverlappingEvents != null)
             {
                 <div class="alert alert-warning">
-                    <h5>Conflicting Events:</h5>
+                    <h5>Venue Already Booked:</h5>
                     <ul>
                         @foreach (var evt in ViewBag.OverlappingEvents)
                         {
                             <li>
-                                @evt.EventName
+                                <strong>@evt.EventName</strong>
                                 <br />
-                                <small class="text-muted">
-                                    @evt.StartDate.ToString("MMM dd, yyyy HH:mm") - @evt.EndDate.ToString("MMM dd, yyyy HH:mm")
-                                </small>
+                                <small class="text-muted">Date: @evt.DateRange</small>
+                                <br />
+                                <small class="text-muted">Time: @evt.TimeRange</small>
                             </li>
                         }
                     </ul>
+                    <p><small>Only one event per day is allowed per venue.</small></p>
                 </div>
             }
 
@@ -58,11 +59,14 @@
                 <label asp-for="EventTypeId" class="control-label">Event Type</label>
                 <select asp-for="EventTypeId" class="form-select">
                     <option value="">-- Select Event Type --</option>
-                    @foreach (var eventType in ViewBag.EventTypes)
+                    @if (ViewBag.EventTypes != null)
                     {
-                        if (eventType.IsActive)
+                        @foreach (var eventType in ViewBag.EventTypes)
                         {
-                            <option value="@eventType.EventTypeId">@eventType.Name</option>
+                            if (eventType.IsActive)
+                            {
+                                <option value="@eventType.EventTypeId">@eventType.Name</option>
+                            }
                         }
                     }
                 </select>
@@ -73,9 +77,12 @@
                 <label asp-for="VenueId" class="control-label"></label>
                 <select asp-for="VenueId" class="form-select">
                     <option value="">-- Select Venue --</option>
-                    @foreach (var venue in ViewBag.Venues)
+                    @if (ViewBag.Venues != null)
                     {
-                        <option value="@venue.VenueId">@venue.VenueName (@venue.Location) - Capacity: @venue.Capacity</option>
+                        @foreach (var venue in ViewBag.Venues)
+                        {
+                            <option value="@venue.VenueId">@venue.VenueName (@venue.Location) - Capacity: @venue.Capacity</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="VenueId" class="text-danger"></span>
@@ -85,6 +92,19 @@
                 <button type="submit" class="btn btn-primary">Create Event</button>
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
+            
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger mt-3">
+                    <h5>Validation Errors:</h5>
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
         </form>
     </div>
 </div>

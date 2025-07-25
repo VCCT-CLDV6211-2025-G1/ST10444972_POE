@@ -39,7 +39,7 @@ namespace WebApplication1.Services
                     query = query.Where(e => 
                         EF.Functions.Like(e.EventName.ToLower(), $"%{searchTerm}%") ||
                         EF.Functions.Like(e.Description.ToLower(), $"%{searchTerm}%") ||
-                        EF.Functions.Like(e.Venue.VenueName.ToLower(), $"%{searchTerm}%")
+                        (e.Venue != null && EF.Functions.Like(e.Venue.VenueName.ToLower(), $"%{searchTerm}%"))
                     );
                     _logger.LogDebug("Applied search term filter: {SearchTerm}", searchTerm);
                 }
@@ -99,7 +99,7 @@ namespace WebApplication1.Services
                 .ToListAsync();
 
             filter.Venues = await _context.Venues
-                .Where(v => v.Status == VenueStatus.Active || v.Status == VenueStatus.Available)
+                .Where(v => v.Status == VenueStatus.Active)
                 .OrderBy(v => v.VenueName)
                 .ToListAsync();
 

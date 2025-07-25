@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<BlobService>();
-builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<IVenueAvailabilityService, VenueAvailabilityService>();
 builder.Services.AddScoped<IEventFilterService, EventFilterService>();
 

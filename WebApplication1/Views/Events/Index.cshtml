@@ -24,45 +24,51 @@
         <form asp-action="Index" method="get" id="filterForm">
             <div class="row g-3">
                 <div class="col-md-4">
-                    <label asp-for="Filter.SearchTerm" class="form-label">Search</label>
-                    <input asp-for="Filter.SearchTerm" class="form-control" placeholder="Search events...">
+                    <label for="searchTerm" class="form-label">Search</label>
+                    <input name="searchTerm" value="@Model.Filter.SearchTerm" class="form-control" placeholder="Search events...">
                 </div>
                 <div class="col-md-4">
-                    <label asp-for="Filter.EventTypeId" class="form-label">Event Type</label>
-                    <select asp-for="Filter.EventTypeId" class="form-select">
+                    <label for="eventTypeId" class="form-label">Event Type</label>
+                    <select name="eventTypeId" class="form-select">
                         <option value="">All Types</option>
-                        @foreach (var type in Model.Filter.EventTypes)
+                        @if (Model.Filter.EventTypes != null)
                         {
-                            <option value="@type.EventTypeId">@type.Name</option>
+                            @foreach (var type in Model.Filter.EventTypes)
+                            {
+                                <option value="@type.EventTypeId" selected="@(Model.Filter.EventTypeId == type.EventTypeId)">@type.Name</option>
+                            }
                         }
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label asp-for="Filter.VenueId" class="form-label">Venue</label>
-                    <select asp-for="Filter.VenueId" class="form-select">
+                    <label for="venueId" class="form-label">Venue</label>
+                    <select name="venueId" class="form-select">
                         <option value="">All Venues</option>
-                        @foreach (var venue in Model.Filter.Venues)
+                        @if (Model.Filter.Venues != null)
                         {
-                            <option value="@venue.VenueId">@venue.VenueName</option>
+                            @foreach (var venue in Model.Filter.Venues)
+                            {
+                                <option value="@venue.VenueId" selected="@(Model.Filter.VenueId == venue.VenueId)">@venue.VenueName</option>
+                            }
                         }
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label asp-for="Filter.StartDate" class="form-label">Start Date</label>
-                    <input asp-for="Filter.StartDate" class="form-control" type="date">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input name="startDate" value="@Model.Filter.StartDate?.ToString("yyyy-MM-dd")" class="form-control" type="date">
                 </div>
                 <div class="col-md-4">
-                    <label asp-for="Filter.EndDate" class="form-label">End Date</label>
-                    <input asp-for="Filter.EndDate" class="form-control" type="date">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input name="endDate" value="@Model.Filter.EndDate?.ToString("yyyy-MM-dd")" class="form-control" type="date">
                 </div>
                 <div class="col-md-4">
-                    <label asp-for="Filter.Status" class="form-label">Status</label>
-                    <select asp-for="Filter.Status" class="form-select">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" class="form-select">
                         <option value="">All Statuses</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="completed">Completed</option>
+                        <option value="scheduled" selected="@(Model.Filter.Status == "scheduled")">Scheduled</option>
+                        <option value="confirmed" selected="@(Model.Filter.Status == "confirmed")">Confirmed</option>
+                        <option value="cancelled" selected="@(Model.Filter.Status == "cancelled")">Cancelled</option>
+                        <option value="completed" selected="@(Model.Filter.Status == "completed")">Completed</option>
                     </select>
                 </div>
 <div class="col-12">
@@ -149,11 +155,14 @@
     <script>
         // Handle search input with debounce
         let timeout;
-        document.getElementById('Filter_SearchTerm').addEventListener('input', (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                document.getElementById('filterForm').submit();
-            }, 500);
-        });
+        const searchInput = document.querySelector('input[name="searchTerm"]');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    document.getElementById('filterForm').submit();
+                }, 500);
+            });
+        }
     </script>
 }

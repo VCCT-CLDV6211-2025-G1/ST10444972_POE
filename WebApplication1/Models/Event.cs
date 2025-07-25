@@ -50,7 +50,7 @@ namespace WebApplication1.Models
         public int EventTypeId { get; set; }
 
         [ForeignKey("EventTypeId")]
-        public virtual EventType EventType { get; set; }
+        public virtual EventType? EventType { get; set; }
 
         // Navigation property
         public virtual Booking? Booking { get; set; }

@@ -1,42 +1,47 @@
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using SkiaSharp;
 
 namespace WebApplication1.Services
 {
     public class ImageService
     {
-        public async Task<byte[]> ResizeImageAsync(Stream imageStream, int maxWidth = 800, int maxHeight = 600)
+        private const int MaxHeight = 1080;
+        private const double TargetAspectRatio = 16.0 / 9.0;
+        private const double AspectRatioTolerance = 0.01; // Allow 1% tolerance
+
+        public async Task<byte[]> SaveImageAsync(Stream imageStream)
         {
-            using var image = Image.FromStream(imageStream);
-            var ratioX = (double)maxWidth / image.Width;
-            var ratioY = (double)maxHeight / image.Height;
-            var ratio = Math.Min(ratioX, ratioY);
+            using var inputStream = new MemoryStream();
+            await imageStream.CopyToAsync(inputStream);
+            inputStream.Position = 0;
 
-            var newWidth = (int)(image.Width * ratio);
-            var newHeight = (int)(image.Height * ratio);
+            using var bitmap = SKBitmap.Decode(inputStream);
+            if (bitmap == null)
+                throw new InvalidOperationException("Could not decode image");
 
-            var destRect = new Rectangle(0, 0, newWidth, newHeight);
-            var destImage = new Bitmap(newWidth, newHeight);
+            ValidateImageDimensions(bitmap);
 
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            // Return the original image data if validation passes
+            inputStream.Position = 0;
+            return inputStream.ToArray();
+        }
 
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+        public bool IsImageFile(string fileName)
+        {
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            return allowedExtensions.Contains(extension);
+        }
 
-                using var wrapMode = new ImageAttributes();
-                wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-            }
+        private void ValidateImageDimensions(SKBitmap bitmap)
+        {
+            if (bitmap.Height > MaxHeight)
+                throw new ArgumentException($"Image height must not exceed {MaxHeight}px");
 
-            using var ms = new MemoryStream();
-            destImage.Save(ms, ImageFormat.Jpeg);
-            return ms.ToArray();
+            double aspectRatio = (double)bitmap.Width / bitmap.Height;
+            double aspectRatioDifference = Math.Abs(aspectRatio - TargetAspectRatio);
+
+            if (aspectRatioDifference > AspectRatioTolerance)
+                throw new ArgumentException("Image must have a 16:9 aspect ratio");
         }
     }
 }

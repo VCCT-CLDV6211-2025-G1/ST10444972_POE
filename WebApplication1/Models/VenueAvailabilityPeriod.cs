@@ -23,10 +23,10 @@ namespace WebApplication1.Models
 
         [Required]
         [StringLength(200)]
-        public string Reason { get; set; }
+        public required string Reason { get; set; }
 
         [ForeignKey("VenueId")]
-        public virtual Venue Venue { get; set; }
+        public required virtual Venue Venue { get; set; }
 
         [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;

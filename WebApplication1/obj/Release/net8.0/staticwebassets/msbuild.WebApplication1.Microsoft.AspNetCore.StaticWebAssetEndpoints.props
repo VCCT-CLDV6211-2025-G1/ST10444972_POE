@@ -36,17 +36,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"xtxxf3hu2r"},{"Name":"integrity","Value":"sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="},{"Name":"label","Value":"_content/WebApplication1/js/site.js"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"231"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Apr 2025 06:33:09 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/WebApplication1/js/venue-availability.bdvrwfwe2p.js">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\venue-availability.js'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bdvrwfwe2p"},{"Name":"integrity","Value":"sha256-jxPHG0QH\u002BrAZFCfWlOfwIZu82DU\u002BI/ulEOYBBMMfYSg="},{"Name":"label","Value":"_content/WebApplication1/js/venue-availability.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4835"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022jxPHG0QH\u002BrAZFCfWlOfwIZu82DU\u002BI/ulEOYBBMMfYSg=\u0022"},{"Name":"Last-Modified","Value":"Wed, 14 May 2025 22:34:35 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WebApplication1/js/venue-availability.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\venue-availability.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-jxPHG0QH\u002BrAZFCfWlOfwIZu82DU\u002BI/ulEOYBBMMfYSg="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4835"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022jxPHG0QH\u002BrAZFCfWlOfwIZu82DU\u002BI/ulEOYBBMMfYSg=\u0022"},{"Name":"Last-Modified","Value":"Wed, 14 May 2025 22:34:35 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"6575"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Jul 2025 09:39:56 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WebApplication1/js/venue-availability.qtlpzy9o2e.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\venue-availability.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qtlpzy9o2e"},{"Name":"integrity","Value":"sha256-QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU="},{"Name":"label","Value":"_content/WebApplication1/js/venue-availability.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6575"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022QmorAWGTOiLFPnn80s0ZgaY3DcQ9Q048egJQC1nJ3dU=\u0022"},{"Name":"Last-Modified","Value":"Fri, 25 Jul 2025 09:39:56 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WebApplication1/lib/bootstrap/dist/css/bootstrap-grid.agp80tu62r.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</AssetFile>

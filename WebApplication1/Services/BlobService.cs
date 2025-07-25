@@ -8,40 +8,42 @@ namespace WebApplication1.Services
     {
         private readonly BlobServiceClient _blobServiceClient;
         private readonly string _containerName;
-        private readonly ImageService _imageService;
         private readonly ILogger<BlobService> _logger;
 
-        public BlobService(IConfiguration configuration, ImageService imageService, ILogger<BlobService> logger)
+        public BlobService(IConfiguration configuration, ILogger<BlobService> logger)
         {
-            _blobServiceClient = new BlobServiceClient(configuration.GetConnectionString("BlobStorage"));
+            var connectionString = configuration.GetConnectionString("BlobStorage");
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                _blobServiceClient = new BlobServiceClient(connectionString);
+            }
             _containerName = "images";
-            _imageService = imageService;
             _logger = logger;
-
-            // Ensure container exists
-            var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-            containerClient.CreateIfNotExists(PublicAccessType.Blob);
         }
 
         public async Task<string> UploadImageAsync(IFormFile file)
         {
+            if (_blobServiceClient == null)
+            {
+                _logger.LogWarning("Blob storage not configured. Skipping image upload.");
+                return string.Empty;
+            }
+
             try
             {
                 _logger.LogInformation("Starting image upload process for file: {FileName}", file.FileName);
                 
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
+                await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+                await containerClient.SetAccessPolicyAsync(PublicAccessType.Blob);
+                
                 var blobName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
                 var blobClient = containerClient.GetBlobClient(blobName);
 
-                // Resize the image
-                _logger.LogInformation("Resizing image");
                 using var stream = file.OpenReadStream();
-                var resizedImageBytes = await _imageService.ResizeImageAsync(stream);
-                
-                using var resizedStream = new MemoryStream(resizedImageBytes);
-                await blobClient.UploadAsync(resizedStream, new BlobHttpHeaders 
+                await blobClient.UploadAsync(stream, new BlobHttpHeaders 
                 { 
-                    ContentType = "image/jpeg" // We're converting all images to JPEG in ImageService
+                    ContentType = file.ContentType
                 });
 
                 _logger.LogInformation("Image uploaded successfully. Blob name: {BlobName}", blobName);
@@ -50,13 +52,13 @@ namespace WebApplication1.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error uploading image: {FileName}", file.FileName);
-                throw;
+                return string.Empty;
             }
         }
 
         public async Task DeleteImageAsync(string blobUrl)
         {
-            if (string.IsNullOrEmpty(blobUrl)) return;
+            if (string.IsNullOrEmpty(blobUrl) || _blobServiceClient == null) return;
 
             try
             {
@@ -72,7 +74,6 @@ namespace WebApplication1.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting image: {BlobUrl}", blobUrl);
-                throw;
             }
         }
     }
